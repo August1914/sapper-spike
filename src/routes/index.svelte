@@ -14,7 +14,7 @@
 </script>
 
 <style>
-	h1, figure, p {
+	h1, figure {
 		text-align: center;
 		margin: 0 auto;
 	}
@@ -59,7 +59,7 @@
 	<figcaption>Have fun with Sapper!</figcaption>
 </figure>
 
-<div><strong>Enter a github username to retrieve public repositories:</strong></div>
+<p><strong>Enter a github username to retrieve public repositories:</strong></p>
 <main>
 	<div class="gitsearch">
 	<form on:submit|preventDefault={onSubmit}>

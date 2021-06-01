@@ -26,6 +26,7 @@
       border-top-right-radius: 10px;
       width: 100%;
   }
+
   ul {
       list-style: none;
       margin: 0;
