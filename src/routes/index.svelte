@@ -1,5 +1,16 @@
 <script>
 	import successkid from 'images/jake-givens-iR8m2RRo-z4-unsplash.jpg';
+	import Search from '../components/Search.svelte'
+	let usernameInputField = '';
+	let repositories = undefined;
+
+	async function onSubmit() {
+		const url = `https://api.github.com/users/${usernameInputField}/repos`;
+
+		const response = await fetch(url);
+		repositories = await response.json();
+		console.log('loaded repositories', repositories)
+	}
 </script>
 
 <style>
@@ -26,7 +37,7 @@
 	}
 
 	p {
-		margin: 1em auto;
+		margin: 1em;
 	}
 
 	@media (min-width: 480px) {
@@ -34,6 +45,7 @@
 			font-size: 4em;
 		}
 	}
+
 </style>
 
 <svelte:head>
@@ -43,8 +55,20 @@
 <h1>Svelte and Sapper</h1>
 
 <figure>
-	<img alt="Success Kid" src="{successkid}">
+	<img alt="Elapsed time photo of highway at night" src="{successkid}">
 	<figcaption>Have fun with Sapper!</figcaption>
 </figure>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<div><strong>Enter a github username to retrieve public repositories:</strong></div>
+<main>
+	<div class="gitsearch">
+	<form on:submit|preventDefault={onSubmit}>
+		<label for="username">GitHub username:</label>
+		<input type="text" name="username" placeholder="jackfranklin" bind:value={usernameInputField}/>
+		<button type="submit">Load repositories</button>
+	</form>
+	{#if repositories}
+		<Search {repositories} />
+	{/if}
+	</div>
+</main>
